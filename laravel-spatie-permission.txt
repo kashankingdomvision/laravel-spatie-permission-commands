@@ -1,0 +1,39 @@
+Spatie default table:
+
+permission
+roles
+model_has_permissions
+model_has_roles
+role_has_permissions
+
+
+-------------------------
+roles
+permission
+role_has_permissions
+
+// create role 	
+   $role = Role::create(['name' => 'writer']);
+
+// create permission
+   $permission = Permission::create(['name' => 'write post']);
+   $permission = Permission::create(['name' => 'edit post']);
+
+// assign role to permission
+   $role = Role::find(1);
+   $permission = Permission::find(1);
+
+//  give "write post" permission to writer
+   $role->givePermissionTo($permission);
+
+// remove permission for role 
+	$role->revokePermissionTo($permission);
+
+// remove role for permission
+	$permission->removeRole($role);
+
+// assigning permission to user
+	auth()->user()->givePermissionTo("edit post");
+
+// assigning role to user
+	auth()->user()->assignRole("editor");
